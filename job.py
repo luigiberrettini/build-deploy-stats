@@ -9,7 +9,7 @@ class Job:
         self.status = status
         self.start_timestamp = parser.parse(start_timestamp)
         self.finish_timestamp = parser.parse(finish_timestamp)
-        self.duration = (int(duration) / 1000) if duration else (self.finish_timestamp - self.start_timestamp).total_seconds()
+        self.duration = (int(duration) / float(1000)) if duration else (self.finish_timestamp - self.start_timestamp).total_seconds()
 
     def report(self, reporter):
         reporter.send_status(self.finish_timestamp, self.name, self.status)
