@@ -1,0 +1,39 @@
+{
+    "Zabbix": {
+        "enabled": true,
+        "user": "pippo",
+        "password": "pluto"
+    },
+    "TeamCity": {
+        "enabled": true,
+        "user": "pippo",
+        "password": "pluto",
+        "server_url": "http://tc.domain",
+        "api_url_prefix": "/httpAuth/app/rest/",
+        "project_id": "MyProject"
+    },
+    "Jenkins": {
+        "enabled": false,
+        "user": "pippo",
+        "password": "pluto",
+        "server_url": "http://tc.domain",
+        "api_url_prefix": "/httpAuth/app/rest/",
+        "project_id": "MyProject"
+    },
+    "OctopusDeploy": {
+        "enabled": false,
+        "user": "pippo",
+        "password": "pluto",
+        "server_url": "http://tc.domain",
+        "api_url_prefix": "/httpAuth/app/rest/",
+        "project_id": "MyProject"
+    },
+    "UrbanCodeDeploy": {
+        "enabled": false,
+        "user": "pippo",
+        "password": "pluto",
+        "server_url": "http://tc.domain",
+        "api_url_prefix": "/httpAuth/app/rest/",
+        "project_id": "MyProject"
+    }
+}
