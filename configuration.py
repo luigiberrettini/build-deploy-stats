@@ -22,9 +22,6 @@ class Configuration:
             section[since_timestamp_key] = self.since_timestamp
         return section
 
-    def setting(self, key):
-        return self.settings[key]
-
     def _load_settings(self):
         with open('settings.json') as settings:    
             return json.load(settings)
