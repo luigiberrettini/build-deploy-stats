@@ -2,7 +2,7 @@
 
 class ShellReporter:
     def send_status(self, timestamp, context, metric_value):
-        self._send(timestamp, context + '.STATUS', metric_value)
+        self._send(timestamp, context + '.STATUS', metric_value + ' (%s)' % 'SUCCESS' if metric_value else 'FAILURE')
 
     def send_duration(self, timestamp, context, metric_value):
         self._send(timestamp, context + '.DURATION', metric_value)
