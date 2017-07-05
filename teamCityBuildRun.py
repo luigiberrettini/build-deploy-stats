@@ -23,4 +23,4 @@ class TeamCityBuildRun:
         self.duration = properties['BuildDuration']
 
     def toJob(self):
-        return Job(self.id, self.build_type_id, self.status, self.start_timestamp, self.finish_timestamp, self.duration)
+        return Job(self.id, self.build_type_id, self.numeric_status, self.start_timestamp, self.finish_timestamp, self.duration)
