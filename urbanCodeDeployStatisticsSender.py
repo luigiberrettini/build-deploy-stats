@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 class UrbanCodeDeployStatisticsSender:
     def __init__(self, cfg, reporter):

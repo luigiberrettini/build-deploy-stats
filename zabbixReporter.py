@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 class ZabbixReporter:
     def __init__(self, server, port):
@@ -12,4 +12,4 @@ class ZabbixReporter:
         self._send(timestamp, context + '.DURATION', metric_value)
 
     def _send(self, timestamp, metric_name, metric_value):
-        print 'timestamp: %s - metric_name: %s - metric_value: %s' % (timestamp, metric_name, metric_value)
+        print('timestamp: {:s} - metric_name: {:s} - metric_value: {:s}'.format(timestamp, metric_name, metric_value))

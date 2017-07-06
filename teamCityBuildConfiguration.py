@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import requests
 import teamCityApiProxy
@@ -41,14 +41,14 @@ class TeamCityBuildConfiguration:
         try:
             return self.api_proxy.get_resource(build_runs_url).json()['build']
         except Exception:
-            print 'Exception retrieving build runs at URL %s' % build_runs_url
+            print('Exception retrieving build runs at URL {:s}'.format(build_runs_url))
             raise
 
     def _url_of_build_runs_since_timestamp(self, since_timestamp, skip, limit):
-        locator_query_string_fragment = 'locator=state:finished,sinceDate:%s,start:%d,count:%d' % (self._url_encode_timestamp(since_timestamp), skip, limit)
+        locator_query_string_fragment = 'locator=state:finished,sinceDate:{:s},start:{:d},count:{:d}'.format(self._url_encode_timestamp(since_timestamp), skip, limit)
         fields_query_string_fragment = 'fields=nextHref,build(id,status,buildType(id,projectId),startDate,finishDate,statistics(property))'
-        query_string = '%s&%s' % (locator_query_string_fragment, fields_query_string_fragment)
-        return '%s?%s' % (self.api_proxy.full_url_from_hypermedia_link(self.build_configuration['builds']['href']), query_string)
+        query_string = '{:s}&{:s}'.format(locator_query_string_fragment, fields_query_string_fragment)
+        return '{:s}?{:s}'.format(self.api_proxy.full_url_from_hypermedia_link(self.build_configuration['builds']['href']), query_string)
 
     def _url_encode_timestamp(self, timestamp):
         return timestamp.replace('+', '%2b')

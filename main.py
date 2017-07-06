@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from settings import Settings
 from shellReporter import ShellReporter
@@ -32,12 +32,12 @@ class Main:
     def _create_stats_senders(self):
         self.statisticsSenders = []
         reporter = self._create_reporter()
-        for key, value in self.stats_sender_factories.iteritems():
+        for key, value in self.stats_sender_factories.items():
             if key(self.settings):
                 self.statisticsSenders.append(value(self.settings, reporter))
 
     def _create_reporter(self):
-        for key, value in self.reporter_factories.iteritems():
+        for key, value in self.reporter_factories.items():
             if key(self.settings):
                 return value(self.settings)
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 class OctopusDeployStatisticsSender:
     def __init__(self, cfg, reporter):
