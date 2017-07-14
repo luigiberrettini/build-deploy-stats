@@ -8,4 +8,4 @@ class ShellReporter:
         self._send(timestamp, context + '.DURATION', metric_value)
 
     def _send(self, timestamp, metric_name, metric_value):
-        print('timestamp: {:s} - metric_name: {:s} - metric_value: {}'.format(timestamp, metric_name, metric_value))
+        print('timestamp: {:%Y:%m:%dT:%H:%M:%S:%z} - metric_name: {:s} - metric_value: {}'.format(timestamp, metric_name, metric_value))

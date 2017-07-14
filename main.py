@@ -42,5 +42,4 @@ class Main:
                 return value(self.settings)
 
 
-sender = Main()
-sender.send_stats()
+Main().send_stats()
