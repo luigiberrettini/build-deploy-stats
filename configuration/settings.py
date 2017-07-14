@@ -7,21 +7,21 @@ from datetime import datetime, timedelta
 
 class Settings:
     def __init__(self):
-        self.configuration = self._load_configuration()
+        self.settings_dict = self._load_from_file()
         yesterday = datetime.now(tzlocal.get_localzone()) - timedelta(days = 1)
         beginning_of_yesterday = yesterday.replace(hour = 0, minute = 0, second = 0, microsecond = 0)
         self.since_timestamp = beginning_of_yesterday.isoformat()
 
     def is_enabled(self, key):
-        return (key in self.configuration) and self.configuration[key]['enabled']
+        return (key in self.settings_dict) and self.settings_dict[key]['enabled']
 
     def section(self, key):
-        section = self.configuration[key]
+        section = self.settings_dict[key]
         since_timestamp_key = 'since_timestamp'
         if since_timestamp_key not in section:
             section[since_timestamp_key] = self.since_timestamp
         return section
 
-    def _load_configuration(self):
-        with open('configuration\settings.json') as configuration:
-            return json.load(configuration)
+    def _load_from_file(self):
+        with open('configuration\settings.json') as file_contents:
+            return json.load(file_contents)
