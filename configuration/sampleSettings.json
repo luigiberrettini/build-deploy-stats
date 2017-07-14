@@ -1,43 +1,43 @@
 {
     "Zabbix": {
         "enabled": true,
-        "user": "pippo",
-        "password": "pluto"
+        "hostname": "myHostName",
+        "discovery_rule_key": "myDiscovery"
     },
     "TeamCity": {
         "enabled": true,
         "page_size": 100,
-        "user": "pippo",
-        "password": "pluto",
+        "user": "myTCUser",
+        "password": "myTCPassword",
         "server_url": "http://tc.domain",
         "api_url_prefix": "/httpAuth/app/rest/",
-        "project_id": "MyProject"
+        "project_id": "MyTCProject"
     },
     "Jenkins": {
         "enabled": false,
         "page_size": 100,
-        "user": "pippo",
-        "password": "pluto",
+        "user": "myJKUser",
+        "password": "myJKPassword",
         "server_url": "http://tc.domain",
         "api_url_prefix": "/httpAuth/app/rest/",
-        "project_id": "MyProject"
+        "project_id": "MyJKProject"
     },
     "OctopusDeploy": {
         "enabled": false,
         "page_size": 100,
-        "user": "pippo",
-        "password": "pluto",
+        "user": "myOPDUser",
+        "password": "myOPDPassword",
         "server_url": "http://tc.domain",
         "api_url_prefix": "/httpAuth/app/rest/",
-        "project_id": "MyProject"
+        "project_id": "MyOPDProject"
     },
     "UrbanCodeDeploy": {
         "enabled": false,
         "page_size": 100,
-        "user": "pippo",
-        "password": "pluto",
+        "user": "myUCDUser",
+        "password": "myUCDPassword",
         "server_url": "http://tc.domain",
         "api_url_prefix": "/httpAuth/app/rest/",
-        "project_id": "MyProject"
+        "project_id": "MyUCDProject"
     }
 }

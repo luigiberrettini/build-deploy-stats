@@ -2,6 +2,7 @@
 
 import ijson.backends.asyncio as ijson
 
+from reporting.category import Category
 from statsSend.teamCity.teamCityBuildRun import TeamCityBuildRun
 
 class TeamCityBuildConfiguration:
@@ -11,6 +12,9 @@ class TeamCityBuildConfiguration:
         self.connection = connection
         self.url_builder = url_builder
         self.page_size = page_size
+
+    def toCategory(self):
+        return Category('TeamCity', self.id)
 
     async def retrieve_build_runs_since_timestamp(self, since_timestamp):
         async with self.connection.get_session() as session:

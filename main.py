@@ -11,7 +11,7 @@ from statsSend.urbanCodeDeploy.urbanCodeDeployStatisticsSender import UrbanCodeD
 class Main:
     reporter_factories = {
         (lambda x: not x.is_enabled('ZabbixReporter')): (lambda x: ShellReporter()),
-        (lambda x: x.is_enabled('ZabbixReporter')): (lambda x: ZabbixReporter(x.section('Zabbix')['user'], x.section('Zabbix')['user']))
+        (lambda x: x.is_enabled('ZabbixReporter')): (lambda x: ZabbixReporter(x.section('Zabbix')['hostname'], x.section('Zabbix')['discovery_rule_key']))
     }
 
     stats_sender_factories = {
@@ -27,7 +27,8 @@ class Main:
 
     def send_stats(self):
         for sender in self.statisticsSenders:
-            sender.send()
+            sender.send_categories()
+            sender.send_values()
 
     def _create_stats_senders(self):
         self.statisticsSenders = []

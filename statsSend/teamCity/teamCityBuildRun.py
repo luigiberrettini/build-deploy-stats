@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from reporting.category import Category
 from reporting.job import Job
 
 #{
@@ -23,4 +24,5 @@ class TeamCityBuildRun:
         self.duration = properties['BuildDuration']
 
     def toJob(self):
-        return Job(self.id, self.build_type_id, self.numeric_status, self.start_timestamp, self.finish_timestamp, self.duration)
+        category = Category('TeamCity', self.build_type_id)
+        return Job(category, self.id, self.numeric_status, self.start_timestamp, self.finish_timestamp, self.duration)
