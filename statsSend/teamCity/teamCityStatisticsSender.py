@@ -4,9 +4,9 @@ import asyncio
 
 from dateutil import parser
 
-from teamCityConnection import TeamCityConnection
-from teamCityUrlBuilder import TeamCityUrlBuilder
-from teamCityProject import TeamCityProject
+from statsSend.teamCity.teamCityConnection import TeamCityConnection
+from statsSend.teamCity.teamCityUrlBuilder import TeamCityUrlBuilder
+from statsSend.teamCity.teamCityProject import TeamCityProject
 
 class TeamCityStatisticsSender:
     def __init__(self, cfg, reporter):

@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
-from settings import Settings
-from shellReporter import ShellReporter
-from zabbixReporter import ZabbixReporter
-from teamCityStatisticsSender import TeamCityStatisticsSender
-from jenkinsStatisticsSender import JenkinsStatisticsSender
-from octopusDeployStatisticsSender import OctopusDeployStatisticsSender
-from urbanCodeDeployStatisticsSender import UrbanCodeDeployStatisticsSender
+from configuration.settings import Settings
+from reporting.shellReporter import ShellReporter
+from reporting.zabbixReporter import ZabbixReporter
+from statsSend.teamCity.teamCityStatisticsSender import TeamCityStatisticsSender
+from statsSend.jenkins.jenkinsStatisticsSender import JenkinsStatisticsSender
+from statsSend.octopusDeploy.octopusDeployStatisticsSender import OctopusDeployStatisticsSender
+from statsSend.urbanCodeDeploy.urbanCodeDeployStatisticsSender import UrbanCodeDeployStatisticsSender
 
 class Main:
     reporter_factories = {

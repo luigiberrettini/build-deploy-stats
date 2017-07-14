@@ -23,5 +23,5 @@ class Settings:
         return section
 
     def _load_configuration(self):
-        with open('settings.json') as configuration:
+        with open('configuration\settings.json') as configuration:
             return json.load(configuration)

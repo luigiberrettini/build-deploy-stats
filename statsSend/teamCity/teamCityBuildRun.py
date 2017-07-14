@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from job import Job
+from reporting.job import Job
 
 #{
 #    "id": 2081741,

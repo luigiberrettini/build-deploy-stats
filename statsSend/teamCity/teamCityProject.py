@@ -2,7 +2,7 @@
 
 import ijson.backends.asyncio as ijson
 
-from teamCityBuildConfiguration import TeamCityBuildConfiguration
+from statsSend.teamCity.teamCityBuildConfiguration import TeamCityBuildConfiguration
 
 class TeamCityProject:
     def __init__(self, id, connection, url_builder, page_size):
