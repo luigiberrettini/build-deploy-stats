@@ -19,7 +19,7 @@ class ZabbixReporter:
         packet = [ ZabbixMetric(self.hostname, self.discovery_rule_key, discovery_rule_payload) ]
         result = ZabbixSender(use_config = True).send(packet)
 
-    def report_job_stats(self, job):
+    def report_job(self, job):
         posix_timestamp = (job.timestamp - self.epoch) // self.one_second
         category = '{:s}.{:s}'.format(job.tool, job.type)
         packet = [

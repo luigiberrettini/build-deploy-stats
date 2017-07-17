@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import asyncio
+
 from configuration.settings import Settings
 from reporting.shellReporter import ShellReporter
 from reporting.zabbixReporter import ZabbixReporter
@@ -27,8 +29,9 @@ class Main:
 
     def send_stats(self):
         for sender in self.statisticsSenders:
-            sender.send_categories()
-            sender.send_values()
+            loop = asyncio.new_event_loop()
+            loop.run_until_complete(sender.send())
+            loop.close()
 
     def _create_stats_senders(self):
         self.statisticsSenders = []

@@ -31,6 +31,3 @@ class Job:
     @property
     def duration(self):
         return self.duration_seconds
-
-    def report(self, reporter):
-        reporter.report_job_stats(self)
