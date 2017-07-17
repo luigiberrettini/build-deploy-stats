@@ -8,9 +8,9 @@ class ZabbixReporter:
     epoch = datetime(1970, 1, 1, tzinfo = timezone.utc)
     one_second = timedelta(seconds = 1)
 
-    def __init__(self, hostname, discovery_rule_key):
-        self.hostname = hostname
-        self.discovery_rule_key = discovery_rule_key
+    def __init__(self, settings):
+        self.hostname = settings['hostname']
+        self.discovery_rule_key = settings['discovery_rule_key']
 
     def report_categories(self, categories):
         to_dict = lambda x: { '{#TOOL}}': '{:s}'.format(x.tool), '{#TYPE}': '{:s}'.format(x.context) }
