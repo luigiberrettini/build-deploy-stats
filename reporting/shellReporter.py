@@ -4,7 +4,7 @@ import json
 
 class ShellReporter:
     def report_categories(self, categories):
-        to_dict = lambda x: { '{#TOOL}}': '{:s}'.format(x.tool), '{#TYPE}': '{:s}'.format(x.context) }
+        to_dict = lambda x: { 'TOOL': '{:s}'.format(x.tool), 'CONTEXT': '{:s}'.format(x.context) }
         category_dict_list = list(map(to_dict, categories))
         print(json.dumps(category_dict_list))
 
