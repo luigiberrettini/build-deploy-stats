@@ -1,8 +1,12 @@
 {
     "Zabbix": {
         "enabled": true,
+        "server": "127.0.0.1",
+        "port": 10051,
         "hostname": "myHostName",
-        "discovery_rule_key": "myDiscovery"
+        "discovery_rule_key": "myDiscovery",
+        "category_tool_macro": "{#TOOL}",
+        "category_context_macro": "{#TYPE}"
     },
     "TeamCity": {
         "enabled": true,
