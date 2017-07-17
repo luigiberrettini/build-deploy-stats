@@ -7,12 +7,12 @@ from statsSend.teamCity.teamCityUrlBuilder import TeamCityUrlBuilder
 from statsSend.teamCity.teamCityProject import TeamCityProject
 
 class TeamCityStatisticsSender:
-    def __init__(self, cfg, reporter):
-        self.page_size = int(cfg['page_size'])
-        connection = TeamCityConnection(cfg['user'], cfg['password'])
-        url_builder = TeamCityUrlBuilder(cfg['server_url'], cfg['api_url_prefix'])
-        self.project = TeamCityProject(cfg['project_id'], connection, url_builder, self.page_size)
-        self.since_timestamp = parser.parse(cfg['since_timestamp']).strftime('%Y%m%dT%H%M%S%z')
+    def __init__(self, settings, reporter):
+        self.page_size = int(settings['page_size'])
+        connection = TeamCityConnection(settings['user'], settings['password'])
+        url_builder = TeamCityUrlBuilder(settings['server_url'], settings['api_url_prefix'])
+        self.project = TeamCityProject(settings['project_id'], connection, url_builder, self.page_size)
+        self.since_timestamp = parser.parse(settings['since_timestamp']).strftime('%Y%m%dT%H%M%S%z')
         self.reporter = reporter
 
     async def send(self):
