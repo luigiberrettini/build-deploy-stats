@@ -26,10 +26,7 @@ class TeamCityProject:
     async def _paginated_build_configurations(self, session, skip, limit):
         build_configurations_url = self._url_of_build_configurations(skip, limit)
         async with session.get(build_configurations_url) as response:
-            #print(await response.text())
             count = 0
-            #async for build_configuration in ijson.items(response.content, 'buildType.item', yajl_backend = yajl2_cffi):
-            #async for build_configuration in ijson.items(response.content, 'buildType.item', yajl_backend = yajl2):
             async for build_configuration in ijson.items(response.content, 'buildType.item'):
                 count += 1
                 yield build_configuration
