@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 
-import sys
-
 from dateutil import parser
 
+from statsSend.utils import print_exception
 from statsSend.urlBuilder import UrlBuilder
 from statsSend.teamCity.teamCityConnection import TeamCityConnection
 from statsSend.teamCity.teamCityProject import TeamCityProject
@@ -23,7 +22,7 @@ class TeamCityStatisticsSender:
                 categories = [build_configuration.toCategory() async for build_configuration in self.project.retrieve_build_configurations()]
                 self.reporter.report_categories(categories)
             except Exception as err:
-                print("Error sending categories: {}".format(err), file = sys.stderr)
+                print_exception('Error sending categories')
 
         try:
             async for build_configuration in self.project.retrieve_build_configurations():
@@ -32,6 +31,6 @@ class TeamCityStatisticsSender:
                         job = build_run.toJob()
                         self.reporter.report_job(job)
                     except Exception as err:
-                        print("Error reporting job: {}".format(err), file = sys.stderr)
+                        print_exception('Error reporting job')
         except Exception as err:
-            print("Error reporting jobs: {}".format(err), file = sys.stderr)
+            print_exception('Error reporting jobs')
