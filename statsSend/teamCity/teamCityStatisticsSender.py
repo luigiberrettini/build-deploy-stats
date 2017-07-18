@@ -2,15 +2,15 @@
 
 from dateutil import parser
 
+from statsSend.urlBuilder import UrlBuilder
 from statsSend.teamCity.teamCityConnection import TeamCityConnection
-from statsSend.teamCity.teamCityUrlBuilder import TeamCityUrlBuilder
 from statsSend.teamCity.teamCityProject import TeamCityProject
 
 class TeamCityStatisticsSender:
     def __init__(self, settings, reporter):
         self.page_size = int(settings['page_size'])
         connection = TeamCityConnection(settings['user'], settings['password'])
-        url_builder = TeamCityUrlBuilder(settings['server_url'], settings['api_url_prefix'])
+        url_builder = UrlBuilder(settings['server_url'], settings['api_url_prefix'])
         self.project = TeamCityProject(settings['project_id'], connection, url_builder, self.page_size)
         self.since_timestamp = parser.parse(settings['since_timestamp']).strftime('%Y%m%dT%H%M%S%z')
         self.reporter = reporter

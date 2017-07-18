@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-class TeamCityUrlBuilder:
+class UrlBuilder:
     def __init__(self, server_url, api_url_prefix):
         self.server_url = server_url
         self.api_url_prefix = api_url_prefix
