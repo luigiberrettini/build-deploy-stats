@@ -3,14 +3,14 @@
 from dateutil import parser
 
 class Job:
-    def __init__(self, category, id, status, start_timestamp, finish_timestamp, duration):
+    def __init__(self, category, id, status, start_timestamp, finish_timestamp, duration = None):
         self.tool_id = category.tool
         self.type_id = category.context
         self.id = id
         self.status_bit = int(status)
         self.start_timestamp = parser.parse(start_timestamp)
         self.finish_timestamp = parser.parse(finish_timestamp)
-        self.duration_seconds = (int(duration) / float(1000)) if duration else (self.finish_timestamp - self.start_timestamp).total_seconds()
+        self.duration_seconds = (self.finish_timestamp - self.start_timestamp).total_seconds() if duration is None else (int(duration) / float(1000))
 
     @property
     def timestamp(self):
