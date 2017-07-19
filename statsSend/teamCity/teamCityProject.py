@@ -5,16 +5,9 @@ import ijson.backends.asyncio as ijson
 from statsSend.teamCity.teamCityBuildConfiguration import TeamCityBuildConfiguration
 
 class TeamCityProject:
-    def __init__(self, id, connection, url_builder, page_size):
+    def __init__(self, session_factory, id):
+        self.session_factory = session_factory
         self.id = id
-        self.connection = connection
-        self.url_builder = url_builder
-        self.page_size = page_size
-
-    async def retrieve_build_configurations(self):
-        async with self.connection.get_session() as session:
-            async for build_configuration_json_dict in self._paginated_build_configurations(session, 0, self.page_size):
-                yield TeamCityBuildConfiguration(build_configuration_json_dict, self.connection, self.url_builder, self.page_size)
 
     #{
     #    "nextHref": "/httpAuth/app/rest/buildTypes?locator=affectedProject:PRJ-Aff,start:500,count:100&fields=nextHref,buildType(id,builds)",
@@ -23,20 +16,15 @@ class TeamCityProject:
     #        ...
     #    ]
     #}
-    async def _paginated_build_configurations(self, session, skip, limit):
-        build_configurations_url = self._url_of_build_configurations(skip, limit)
-        async with session.get(build_configurations_url) as response:
-            count = 0
-            async for build_configuration in ijson.items(response.content, 'buildType.item'):
-                count += 1
-                yield build_configuration
-            if not count:
-                return
-            async for build_configuration in self._paginated_build_configurations(session, skip + limit, limit):
-                yield build_configuration
+    async def retrieve_build_configurations(self):
+        resource_factory = lambda skip, limit: self._url_of_build_configurations(skip, limit)
+        result_key = 'buildType'
+        async with self.session_factory() as session:
+            async for build_configuration_json_dict in session.get_resource_paginated_as_json(resource_factory, result_key):
+                yield TeamCityBuildConfiguration(session, build_configuration_json_dict)
 
     def _url_of_build_configurations(self, skip, limit):
         locator_query_string_fragment = 'locator=affectedProject:{:s},start:{:d},count:{:d}'.format(self.id, skip, limit)
         fields_query_string_fragment = 'fields=nextHref,buildType(id,builds)'
         query_string = '{:s}&{:s}'.format(locator_query_string_fragment, fields_query_string_fragment)
-        return '{:s}?{:s}'.format(self.url_builder.full_url_from_resource_url('buildTypes'), query_string)
+        return '{:s}?{:s}'.format('buildTypes', query_string)

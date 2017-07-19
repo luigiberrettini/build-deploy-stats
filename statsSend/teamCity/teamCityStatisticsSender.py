@@ -2,17 +2,18 @@
 
 from dateutil import parser
 
+from statsSend.session import Session
 from statsSend.utils import print_exception
 from statsSend.urlBuilder import UrlBuilder
-from statsSend.teamCity.teamCityConnection import TeamCityConnection
 from statsSend.teamCity.teamCityProject import TeamCityProject
 
 class TeamCityStatisticsSender:
     def __init__(self, settings, reporter):
-        self.page_size = int(settings['page_size'])
-        connection = TeamCityConnection(settings['user'], settings['password'])
-        url_builder = UrlBuilder(settings['server_url'], settings['api_url_prefix'])
-        self.project = TeamCityProject(settings['project_id'], connection, url_builder, self.page_size)
+        page_size = int(settings['page_size'])
+        url_builder = UrlBuilder(settings['server_url'], settings['api_url_prefix'], page_size)
+        headers = { 'Accept': 'application/json'}
+        session_factory = lambda: Session(url_builder, headers, settings['user'], settings['password'])
+        self.project = TeamCityProject(session_factory, settings['project_id'])
         self.since_timestamp = parser.parse(settings['since_timestamp']).strftime('%Y%m%dT%H%M%S%z')
         self.reporter = reporter
 
