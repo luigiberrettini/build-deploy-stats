@@ -20,7 +20,7 @@ class TeamCityProject:
     #    "nextHref": "/httpAuth/app/rest/buildTypes?locator=affectedProject:PRJ-Aff,start:500,count:100&fields=nextHref,buildType(id,builds)",
     #    "buildType": [
     #        { "id": "PRJ-A_BT-1", "builds": { "href": "/httpAuth/app/rest/buildTypes/id:PRJ-A_BT-1/builds/" } },
-    #        { "id": "PRJ-B_BT-2", "builds": { "href": "/httpAuth/app/rest/buildTypes/id:PRJ-B_BT-2/builds/" } }
+    #        ...
     #    ]
     #}
     async def _paginated_build_configurations(self, session, skip, limit):

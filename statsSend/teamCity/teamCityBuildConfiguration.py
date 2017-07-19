@@ -34,23 +34,13 @@ class TeamCityBuildConfiguration:
     #            "finishDate": "20160916T111011+0200",
     #            "statistics": { "property": [ { "name": "BuildDuration", "value": "10362" }, { "name": "SuccessRate", "value": "0" } ] }
     #        },
-    #        {
-    #            "id": "2081742",
-    #            "status": "FAILURE",
-    #            "buildType": { "id": "PRJ-A_BT-1", "projectId": "PRJ-A" },
-    #            "startDate": "20171016T110951+0200",
-    #            "finishDate": "20171116T111011+0200",
-    #            "statistics": { "property": [ { "name": "BuildDuration", "value": "20316" }, { "name": "SuccessRate", "value": "1" } ] }
-    #        }
+    #        ...
     #    ]
     async def _paginated_build_runs(self, session, since_timestamp, skip, limit):
         build_runs_url = self._url_of_build_runs_since_timestamp(since_timestamp, skip, limit)
 
         async with session.get(build_runs_url) as response:
-            #print(await response.text())
             count = 0
-            #async for build_run in ijson.items(response.content, 'build.item', yajl_backend = yajl2_cffi):
-            #async for build_run in ijson.items(response.content, 'build.item', yajl_backend = yajl2):
             async for build_run in ijson.items(response.content, 'build.item'):
                 count += 1
                 yield build_run
