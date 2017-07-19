@@ -9,9 +9,9 @@ class ShellReporter:
         print(json.dumps(category_dict_list))
 
     def report_job(self, job):
-        category = '{:s}-{:s}'.format(job.tool, job.type)
+        category = '{:s}->{:s}'.format(job.tool, job.type)
         self._report_job(job.timestamp, '{:s}.STATUS'.format(category), '{:d} ({:s})'.format(job.status, 'SUCCESS' if job.status else 'FAILURE'))
         self._report_job(job.timestamp, '{:s}.DURATION'.format(category), job.duration)
 
     def _report_job(self, timestamp, metric_name, metric_value):
-        print('timestamp: {:%Y:%m:%dT:%H:%M:%S:%z} - metric_name: {:s} - metric_value: {}'.format(timestamp, metric_name, metric_value))
+        print('timestamp: {:%Y:%m:%dT:%H:%M:%S:%z} | metric_name: {:s} | metric_value: {}'.format(timestamp, metric_name, metric_value))
