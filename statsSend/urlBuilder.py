@@ -5,7 +5,7 @@ class UrlBuilder:
         self.server_url = server_url
         self.api_url_prefix = api_url_prefix
         self.page_size = page_size
-        
+
     def relative_url_from_resource(self, resource):
         return self.api_url_prefix + resource
 
