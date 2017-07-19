@@ -13,8 +13,8 @@
         "page_size": 100,
         "user": "myTCUser",
         "password": "myTCPassword",
-        "server_url": "http://tc.domain",
-        "api_url_prefix": "/httpAuth/app/rest/",
+        "server_url": "http://tc.domain/",
+        "api_url_prefix": "httpAuth/app/rest/",
         "project_id": "MyTCProject"
     },
     "Jenkins": {
@@ -22,26 +22,24 @@
         "page_size": 100,
         "user": "myJKUser",
         "password": "myJKPassword",
-        "server_url": "http://tc.domain",
-        "api_url_prefix": "/httpAuth/app/rest/",
+        "server_url": "http://jk.domain/",
+        "api_url_prefix": "jkprefix/",
         "project_id": "MyJKProject"
     },
     "OctopusDeploy": {
-        "enabled": false,
-        "page_size": 100,
-        "user": "myOPDUser",
-        "password": "myOPDPassword",
-        "server_url": "http://tc.domain",
-        "api_url_prefix": "/httpAuth/app/rest/",
-        "project_id": "MyOPDProject"
+        "enabled": true,
+        "api_key": "myOPDApiKey",
+        "server_url": "http://opd.domain/",
+        "api_url_prefix": "api/",
+        "project_group_filter": "*MyFilter*"
     },
     "UrbanCodeDeploy": {
         "enabled": false,
         "page_size": 100,
         "user": "myUCDUser",
         "password": "myUCDPassword",
-        "server_url": "http://tc.domain",
-        "api_url_prefix": "/httpAuth/app/rest/",
+        "server_url": "http://tc.domain/",
+        "api_url_prefix": "ucdprefix/",
         "project_id": "MyUCDProject"
     }
 }
