@@ -11,7 +11,7 @@ class TeamCityBuildConfiguration:
         self.id = json_dict['id']
         self.build_runs_hypermedia_link = json_dict['builds']['href']
 
-    def toCategory(self):
+    def to_category(self):
         return Category('TeamCity', self.id)
 
     #{

@@ -25,7 +25,7 @@ class Session:
         return self.get_url_at_once_as_json(relative_url)
 
     def get_resource_paginated_as_json(self, resource_factory, result_key):
-        relative_url_factory = lambda s, l: self.url_builder.relative_url_from_resource(resource_factory(s, l))
+        relative_url_factory = lambda skip, limit: self.url_builder.relative_url_from_resource(resource_factory(skip, limit))
         return self.get_url_paginated_as_json(relative_url_factory, result_key)
 
     def get_url(self, relative_url):

@@ -23,6 +23,6 @@ class TeamCityBuildRun:
         self.finish_timestamp = json_dict['finishDate']
         self.duration = properties['BuildDuration']
 
-    def toJob(self):
+    def to_job(self):
         category = Category('TeamCity', self.build_type_id)
         return Job(category, self.id, self.numeric_status, self.start_timestamp, self.finish_timestamp, self.duration)
