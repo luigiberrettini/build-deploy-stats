@@ -40,10 +40,10 @@ class Session:
     async def get_url_paginated_as_json(self, relative_url_factory, result_key, page = 0):
         relative_url_lambda = lambda page_size: relative_url_factory(page * page_size, page_size)
         url = self.url_builder.absolute_url_from_relative_factory(relative_url_lambda)
-
         async with self.session.get(url) as response:
             count = 0
-            async for result in ijson.backends.asyncio.items(response.content, '{:s}.item'.format(result_key)):
+            result_selector = '{:s}{:s}item'.format(result_key, '.' if result_key else '')
+            async for result in ijson.backends.asyncio.items(response.content, result_selector):
                 count += 1
                 yield result
             if not count:

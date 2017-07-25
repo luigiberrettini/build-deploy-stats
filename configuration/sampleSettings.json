@@ -39,11 +39,11 @@
     "UrbanCodeDeploy": {
         "enabled": false,
         "page_size": 100,
-        "user": "myUCDUser",
-        "password": "myUCDPassword",
+        "user": "myUCDUser", // PasswordIsAuthToken if using a token
+        "password_or_auth_token": "myUCDPassword",
         "server_url": "http://tc.domain/",
         "verify_ssl_certs": true,
         "api_url_prefix": "ucdprefix/",
-        "project_id": "MyUCDProject"
+        "tag_name": "MyUCDTag"
     }
 }
