@@ -23,7 +23,7 @@ class OctopusDeployProject:
         resource = 'progression/{:s}'.format(self.id)
         progression = await self.session.get_resource_at_once_as_json(resource)
         for environment_json_dict in progression['Environments']:
-            yield Category('OctopusDeploy', self._task_name(environment_json_dict))
+            yield Category('OctopusDeploy', self.slug, environment_json_dict['Name'])
 
     #{
     #    "Items": [
@@ -43,12 +43,9 @@ class OctopusDeployProject:
             if (parser.parse(deployment_json_dict['Created']) > since_timestamp):
                 environment_json_dict = await self._environment_related_to_deployment(deployment_json_dict)
                 task_json_dict = await self._task_related_to_deployment(deployment_json_dict)
-                task = OctopusDeployTask(self._task_name(environment_json_dict), task_json_dict)
+                task = OctopusDeployTask(self.slug, environment_json_dict['Name'], task_json_dict)
                 if (task.is_completed):
                     yield task
-
-    def _task_name(self, environment_json_dict):
-        return '{:s}-{:s}'.format(self.slug, environment_json_dict['Name'].lower())
 
     #{
     #    "Items": [

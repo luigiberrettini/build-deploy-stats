@@ -16,9 +16,10 @@ from reporting.job import Job
 #    "Links": { ... }
 #}
 class OctopusDeployTask:
-    def __init__(self, name, json_dict):
+    def __init__(self, project, environment, json_dict):
         self.id = json_dict['Id']
-        self.name = name
+        self.project = project
+        self.environment = environment
         self.completed = json_dict['IsCompleted']
         self.state = json_dict['State']
         self.numeric_state = 1 if self.state == 'Success' else 0
@@ -30,7 +31,7 @@ class OctopusDeployTask:
         return self.completed
 
     def to_job(self):
-        category = Category('OctopusDeploy', self.name)
+        category = Category('OctopusDeploy', self.project, self.environment)
         start_timestamp = self._utc_timestamp_to_local(self.start_timestamp)
         finish_timestamp = self._utc_timestamp_to_local(self.finish_timestamp)
         return Job(category, self.id, self.numeric_state, start_timestamp, finish_timestamp)
