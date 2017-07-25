@@ -12,7 +12,9 @@ class TeamCityStatisticsSender:
         page_size = int(settings['page_size'])
         url_builder = UrlBuilder(settings['server_url'], settings['api_url_prefix'], page_size)
         headers = { 'Accept': 'application/json'}
-        self.session_factory = lambda: Session(url_builder, headers, settings['user'], settings['password'])
+        user = settings['user']
+        password = settings['password']
+        self.session_factory = lambda: Session(url_builder, headers, user, password)
         self.project_id = settings['project_id']
         self.since_timestamp = parser.parse(settings['since_timestamp']).strftime('%Y%m%dT%H%M%S%z')
         self.reporter = reporter

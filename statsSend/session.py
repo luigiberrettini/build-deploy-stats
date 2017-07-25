@@ -4,13 +4,15 @@ import aiohttp
 import ijson.backends.asyncio
 
 class Session:
-    def __init__(self, url_builder, headers, user = None, password = None):
+    def __init__(self, url_builder, headers, user = None, password = None, verify_ssl_certs = True):
         self.url_builder = url_builder
         self.headers = headers
         self.basic_auth_credentials = None if (user is None or password is None) else aiohttp.BasicAuth(login = user, password = password)
+        self.verify_ssl_certs = verify_ssl_certs
 
     async def __aenter__(self):
-        self.session = aiohttp.ClientSession(auth = self.basic_auth_credentials, headers = self.headers)
+        tcp_connector = None if self.verify_ssl_certs else aiohttp.TCPConnector(verify_ssl = False)
+        self.session = aiohttp.ClientSession(auth = self.basic_auth_credentials, headers = self.headers, connector = tcp_connector)
         return self
 
     async def __aexit__(self, exc_type, exc, tb):

@@ -13,7 +13,8 @@ class OctopusDeployStatisticsSender:
         page_size = 30
         url_builder = UrlBuilder(settings['server_url'], settings['api_url_prefix'], page_size)
         headers = { 'Accept': 'application/json', 'X-Octopus-ApiKey': settings['api_key'] }
-        self.session_factory = lambda: Session(url_builder, headers)
+        verify_ssl_certs = settings['verify_ssl_certs']
+        self.session_factory = lambda: Session(url_builder, headers, verify_ssl_certs)
         self.project_group_filter = settings['project_group_filter']
         self.since_timestamp = parser.parse(settings['since_timestamp'])
         self.reporter = reporter
