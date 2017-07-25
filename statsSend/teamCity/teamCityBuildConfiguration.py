@@ -29,6 +29,7 @@ class TeamCityBuildConfiguration:
     #        },
     #        ...
     #    ]
+    #}
     async def retrieve_build_runs_since_timestamp(self, since_timestamp):
         relative_url_factory = lambda skip, limit: self._url_of_build_runs_since_timestamp(since_timestamp, skip, limit)
         result_key = 'build'
