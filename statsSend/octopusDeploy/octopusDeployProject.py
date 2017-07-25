@@ -40,7 +40,7 @@ class OctopusDeployProject:
     #}
     async def retrieve_tasks_since_timestamp(self, since_timestamp):
         async for deployment_json_dict in self._paginated_deployments():
-            if (parser.parse(deployment_json_dict['Created']) > since_timestamp):
+            if (parser.parse(deployment_json_dict['Created']) >= since_timestamp):
                 environment_json_dict = await self._environment_related_to_deployment(deployment_json_dict)
                 task_json_dict = await self._task_related_to_deployment(deployment_json_dict)
                 task = OctopusDeployTask(self.slug, environment_json_dict['Name'], task_json_dict)
