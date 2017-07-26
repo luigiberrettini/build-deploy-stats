@@ -30,16 +30,16 @@ class Session:
         relative_url_factory = lambda skip, limit: self.url_builder.relative_url_from_resource(resource_factory(skip, limit))
         return self.get_url_paginated_as_json(relative_url_factory, result_key)
 
-    def get_url(self, relative_url):
-        return self.session.get(self.url_builder.absolute_url_from_relative(relative_url))
+    def get_url(self, url):
+        return self.session.get(self.url_builder.absolute_url_from_relative(url))
 
-    async def get_url_at_once_as_json(self, relative_url):
-        async with self.session.get(self.url_builder.absolute_url_from_relative(relative_url)) as response:
+    async def get_url_at_once_as_json(self, url):
+        async with self.session.get(self.url_builder.absolute_url_from_relative(url)) as response:
             return await response.json()
 
-    async def get_url_paginated_as_json(self, relative_url_factory, result_key, page = 0):
-        relative_url_lambda = lambda page_size: relative_url_factory(page * page_size, page_size)
-        url = self.url_builder.absolute_url_from_relative_factory(relative_url_lambda)
+    async def get_url_paginated_as_json(self, url_factory, result_key, page = 0):
+        url_lambda = lambda page_size: url_factory(page * page_size, page_size)
+        url = self.url_builder.absolute_url_from_relative_factory(url_lambda)
         async with self.session.get(url) as response:
             count = 0
             result_selector = '{:s}{:s}item'.format(result_key, '.' if result_key else '')
@@ -48,5 +48,5 @@ class Session:
                 yield result
             if not count:
                 return
-            async for result in self.get_url_paginated_as_json(relative_url_factory, result_key, page + 1):
+            async for result in self.get_url_paginated_as_json(url_factory, result_key, page + 1):
                 yield result
