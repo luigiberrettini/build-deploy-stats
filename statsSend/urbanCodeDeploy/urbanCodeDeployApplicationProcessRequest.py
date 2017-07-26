@@ -21,7 +21,7 @@ class UrbanCodeDeployApplicationProcessRequest:
         self.environment = json_dict['environment']['name']
         self.state = json_dict['state']
         self.result = json_dict['result']
-        self.numeric_result = json_dict['result'] in ['SCHEDULED FOR FUTURE', 'SUCCEEDED', 'COMPENSATED', 'AWAITING APPROVAL']
+        self.numeric_result = 1 if json_dict['result'] in ['SCHEDULED FOR FUTURE', 'SUCCEEDED', 'COMPENSATED', 'AWAITING APPROVAL'] else 0
         self.start_timestamp = self._posix_timestamp_to_local(json_dict['rootTrace']['startDate'])
         self.finish_timestamp = self._posix_timestamp_to_local(json_dict['rootTrace']['endDate'])
         self.duration = json_dict['rootTrace']['duration']
