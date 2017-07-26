@@ -22,11 +22,11 @@ class ZabbixReporter:
         packet = [ ZabbixMetric(self.hostname, self.discovery_rule_key, discovery_rule_payload) ]
         self.sender.send(packet)
 
-    def report_job(self, job):
-        posix_timestamp = (job.timestamp - self.epoch) // self.one_second
-        category = '{:s}.{:s}'.format(job.tool, job.type)
+    def report_activity(self, activity):
+        posix_timestamp = (activity.timestamp - self.epoch) // self.one_second
+        category = '{:s}.{:s}'.format(activity.tool, activity.type)
         packet = [
-          ZabbixMetric(self.hostname, 'STATUS[{:s}]'.format(category), job.status, posix_timestamp),
-          ZabbixMetric(self.hostname, 'DURATION[{:s}]'.format(category), job.duration, posix_timestamp),
+          ZabbixMetric(self.hostname, 'STATUS[{:s}]'.format(category), activity.status, posix_timestamp),
+          ZabbixMetric(self.hostname, 'DURATION[{:s}]'.format(category), activity.duration, posix_timestamp),
         ]
         self.sender.send(packet)

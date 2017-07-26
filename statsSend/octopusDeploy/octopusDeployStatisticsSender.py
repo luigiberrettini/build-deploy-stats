@@ -36,12 +36,12 @@ class OctopusDeployStatisticsSender:
                     async for project in project_group.retrieve_projects():
                         async for task in project.retrieve_tasks_since_timestamp(self.since_timestamp):
                             try:
-                                job = task.to_job()
-                                self.reporter.report_job(job)
+                                activity = task.to_activity()
+                                self.reporter.report_activity(activity)
                             except Exception:
-                                print_exception('Error reporting job')
+                                print_exception('Error reporting activity')
             except Exception:
-                print_exception('Error reporting jobs')
+                print_exception('Error reporting activities')
 
     async def _categories(self, project_group_set):
         async for project_group in project_group_set.items():

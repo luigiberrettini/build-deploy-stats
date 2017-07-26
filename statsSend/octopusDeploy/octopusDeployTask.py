@@ -4,7 +4,7 @@ from dateutil import parser
 from datetime import timezone
 
 from reporting.category import Category
-from reporting.job import Job
+from reporting.activity import Activity
 
 #{
 #    "Id": "ServerTasks-156597",
@@ -30,11 +30,11 @@ class OctopusDeployTask:
     def is_completed(self):
         return self.completed
 
-    def to_job(self):
+    def to_activity(self):
         category = Category('OctopusDeploy', self.project, self.environment)
         start_timestamp = self._utc_timestamp_to_local(self.start_timestamp)
         finish_timestamp = self._utc_timestamp_to_local(self.finish_timestamp)
-        return Job(category, self.id, self.numeric_state, start_timestamp, finish_timestamp)
+        return Activity(category, self.id, self.numeric_state, start_timestamp, finish_timestamp)
         
     def _utc_timestamp_to_local(self, timestamp):
         parsed = parser.parse(timestamp)

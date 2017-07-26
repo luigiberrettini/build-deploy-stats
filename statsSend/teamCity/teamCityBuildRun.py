@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from reporting.category import Category
-from reporting.job import Job
+from reporting.activity import Activity
 
 #{
 #    "id": 2081741,
@@ -23,6 +23,6 @@ class TeamCityBuildRun:
         self.finish_timestamp = json_dict['finishDate']
         self.duration = properties['BuildDuration']
 
-    def to_job(self):
+    def to_activity(self):
         category = Category('TeamCity', self.build_type_id)
-        return Job(category, self.id, self.numeric_status, self.start_timestamp, self.finish_timestamp, self.duration)
+        return Activity(category, self.id, self.numeric_status, self.start_timestamp, self.finish_timestamp, self.duration)

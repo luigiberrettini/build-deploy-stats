@@ -2,7 +2,7 @@
 
 from dateutil import parser
 
-class Job:
+class Activity:
     def __init__(self, category, id, status, start_timestamp, finish_timestamp, duration = None):
         self.tool_id = category.tool
         self.type_id = category.context

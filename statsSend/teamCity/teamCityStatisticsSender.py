@@ -35,9 +35,9 @@ class TeamCityStatisticsSender:
                 async for build_configuration in project.retrieve_build_configurations():
                     async for build_run in build_configuration.retrieve_build_runs_since_timestamp(self.since_timestamp):
                         try:
-                            job = build_run.to_job()
-                            self.reporter.report_job(job)
+                            activity = build_run.to_activity()
+                            self.reporter.report_activity(activity)
                         except Exception as err:
-                            print_exception('Error reporting job')
+                            print_exception('Error reporting activity')
             except Exception as err:
-                print_exception('Error reporting jobs')
+                print_exception('Error reporting activities')

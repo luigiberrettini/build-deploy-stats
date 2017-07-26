@@ -3,7 +3,7 @@
 from datetime import datetime, timezone
 
 from reporting.category import Category
-from reporting.job import Job
+from reporting.activity import Activity
 
 #{
 #    "id": "669bfeea-92e8-47f8-a9e7-03497253bd21",
@@ -26,9 +26,9 @@ class UrbanCodeDeployApplicationProcessRequest:
         self.finish_timestamp = self._posix_timestamp_to_local(json_dict['rootTrace']['endDate'])
         self.duration = json_dict['rootTrace']['duration']
 
-    def to_job(self):
+    def to_activity(self):
         category = Category('UrbanCodeDeploy', self.application, self.environment)
-        return Job(category, self.id, self.numeric_result, self.start_timestamp, self.finish_timestamp, self.duration)
+        return Activity(category, self.id, self.numeric_result, self.start_timestamp, self.finish_timestamp, self.duration)
 
     def _posix_timestamp_to_local(self, posix_timestamp_in_ms):
         posix_timestamp_in_s = posix_timestamp_in_ms / 1000

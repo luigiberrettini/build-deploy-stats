@@ -39,12 +39,12 @@ class UrbanCodeDeployStatisticsSender:
                 tag = UrbanCodeDeployTag(session, self.tag_name)
                 async for app_process_request in tag.retrieve_application_process_requests_since_posix_timestamp(self.since_posix_timestamp):
                     try:
-                        job = app_process_request.to_job()
-                        self.reporter.report_job(job)
+                        activity = app_process_request.to_activity()
+                        self.reporter.report_activity(activity)
                     except Exception as err:
-                        print_exception('Error reporting job')
+                        print_exception('Error reporting activity')
             except Exception as err:
-                print_exception('Error reporting jobs')
+                print_exception('Error reporting activities')
 
 
     async def _categories(self, tag):
