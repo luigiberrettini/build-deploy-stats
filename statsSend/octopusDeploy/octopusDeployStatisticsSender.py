@@ -11,7 +11,7 @@ from statsSend.octopusDeploy.octopusDeployProjectGroupSet import OctopusDeployPr
 class OctopusDeployStatisticsSender:
     def __init__(self, settings, reporter):
         page_size = 30
-        url_builder = UrlBuilder(settings['server_url'], settings['api_url_prefix'], page_size)
+        url_builder = UrlBuilder(settings['server_url'], settings['api_url_prefix'], '', page_size)
         headers = { 'Accept': 'application/json', 'X-Octopus-ApiKey': settings['api_key'] }
         verify_ssl_certs = settings['verify_ssl_certs']
         self.session_factory = lambda: Session(url_builder, headers, verify_ssl_certs)

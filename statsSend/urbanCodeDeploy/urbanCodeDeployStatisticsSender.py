@@ -14,7 +14,7 @@ class UrbanCodeDeployStatisticsSender:
 
     def __init__(self, settings, reporter):
         page_size = int(settings['page_size'])
-        url_builder = UrlBuilder(settings['server_url'], settings['api_url_prefix'], page_size)
+        url_builder = UrlBuilder(settings['server_url'], settings['api_url_prefix'], '', page_size)
         headers = { 'Accept': 'application/json'}
         user = settings['user']
         password_or_auth_token = settings['password_or_auth_token']
