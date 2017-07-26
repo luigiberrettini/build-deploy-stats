@@ -22,11 +22,12 @@
         "enabled": false,
         "page_size": 100,
         "user": "myJKUser",
-        "password": "myJKPassword",
+        "password_or_auth_token": "myJKPassword",
         "server_url": "http://jk.domain/",
         "verify_ssl_certs": true,
-        "api_url_prefix": "jkprefix/",
-        "project_id": "MyJKProject"
+        "json_api_url_suffix": "/api/json",
+        "xml_api_url_suffix": "/api/xml",
+        "job_name": "MyJKJob"
     },
     "OctopusDeploy": {
         "enabled": true,
@@ -41,9 +42,9 @@
         "page_size": 100,
         "user": "myUCDUser", // PasswordIsAuthToken if using a token
         "password_or_auth_token": "myUCDPassword",
-        "server_url": "http://tc.domain/",
+        "server_url": "http://ucd.domain/",
         "verify_ssl_certs": true,
-        "api_url_prefix": "ucdprefix/",
+        "api_url_prefix": "rest/deploy/",
         "tag_name": "MyUCDTag"
     }
 }
