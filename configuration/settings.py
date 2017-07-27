@@ -4,6 +4,7 @@ import json
 import tzlocal
 
 from datetime import datetime, timedelta
+from os import path
 
 class Settings:
     def __init__(self):
@@ -23,5 +24,7 @@ class Settings:
         return section
 
     def _load_from_file(self):
-        with open('configuration\settings.json') as file_contents:
+        settings_directory = path.dirname(path.realpath(__file__))
+        settings_file = path.join(settings_directory, 'settings.json')
+        with open(settings_file) as file_contents:
             return json.load(file_contents)
