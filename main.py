@@ -12,8 +12,8 @@ from statsSend.urbanCodeDeploy.urbanCodeDeployStatisticsSender import UrbanCodeD
 
 class Main:
     reporter_factories = {
-        (lambda x: not x.is_enabled('ZabbixReporter')): (lambda x: ShellReporter()),
-        (lambda x: x.is_enabled('ZabbixReporter')): (lambda x: ZabbixReporter(x.section('Zabbix')))
+        (lambda x: not x.is_enabled('Zabbix')): (lambda x: ShellReporter()),
+        (lambda x: x.is_enabled('Zabbix')): (lambda x: ZabbixReporter(x.section('Zabbix')))
     }
 
     stats_sender_factories = {
