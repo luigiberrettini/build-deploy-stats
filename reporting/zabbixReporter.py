@@ -29,9 +29,12 @@ class ZabbixReporter:
 
     def report_activity(self, activity):
         posix_timestamp = (activity.timestamp - self.epoch) // self.one_second
-        category = '{:s}.{:s}'.format(activity.tool, activity.type)
         packet = [
-          ZabbixMetric(self.hostname, 'STATUS[{:s}]'.format(category), activity.status, posix_timestamp),
-          ZabbixMetric(self.hostname, 'DURATION[{:s}]'.format(category), activity.duration, posix_timestamp),
+          self._zabbixMetric('STATUS', activity, posix_timestamp),
+          self._zabbixMetric('DURATION', activity, posix_timestamp)
         ]
         self.sender.send(packet)
+
+    def _zabbixMetric(self, metricKind, activity, posix_timestamp):
+        key = '{0}_{1}[{0}.{2}]'.format(activity.tool, metricKind, activity.type)
+        return ZabbixMetric(self.hostname, key, activity.status, posix_timestamp)
