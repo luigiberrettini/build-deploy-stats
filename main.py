@@ -28,10 +28,11 @@ class Main:
         self._create_stats_senders()
 
     def send_stats(self):
-        for sender in self.statisticsSenders:
-            loop = asyncio.new_event_loop()
-            loop.run_until_complete(sender.send())
-            loop.close()
+        loop = asyncio.get_event_loop()
+        to_future_send = lambda sender: asyncio.ensure_future(sender.send())
+        future_send_list = list(map(to_future_send, self.statisticsSenders))
+        loop.run_until_complete(asyncio.gather(*future_send_list))
+        loop.close()
 
     def _create_stats_senders(self):
         self.statisticsSenders = []
