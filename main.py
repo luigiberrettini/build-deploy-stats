@@ -2,8 +2,6 @@
 
 import asyncio
 
-from concurrent.futures import ThreadPoolExecutor
-
 from configuration.settings import Settings
 from reporting.shellReporter import ShellReporter
 from reporting.zabbixReporter import ZabbixReporter
@@ -30,9 +28,10 @@ class Main:
         self._create_stats_senders()
 
     def send_stats(self):
-        with ThreadPoolExecutor(max_workers = len(self.statisticsSenders)) as executor:
-            for sender in self.statisticsSenders:
-                executor.submit(self._send_in_event_loop, sender)
+        for sender in self.statisticsSenders:
+            loop = asyncio.new_event_loop()
+            loop.run_until_complete(sender.send())
+            loop.close()
 
     def _create_stats_senders(self):
         self.statisticsSenders = []
@@ -45,11 +44,6 @@ class Main:
         for key, value in self.reporter_factories.items():
             if key(self.settings):
                 return value(self.settings)
-
-    def _send_in_event_loop(self, sender):
-        loop = asyncio.new_event_loop()
-        loop.run_until_complete(sender.send())
-        loop.close()
 
 
 Main().send_stats()
